@@ -39,10 +39,10 @@ export class LotrClient {
     async fetch_(
         baseUrl: string,
         path: string,
-        options: { method: string; body?: string; headers?: any; timeoutMs?: number }
+        options: { method: string; body?: string; headers?: any}
     ): Promise<any> {
         // Retrieve parameters
-        const { method, body, timeoutMs, headers } = options;
+        const { method, body, headers } = options;
 
         // Merge options
         Object.assign(options,
@@ -110,9 +110,6 @@ export class LotrClient {
                     time: { startTs, endTs: new Date(), timeoutTs: null },
                 });
             }
-        } finally {
-            // Clear Request timeout
-            clearTimeout(timeout);
         }
 
         return {
