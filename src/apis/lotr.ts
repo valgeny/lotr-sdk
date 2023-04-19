@@ -1,6 +1,5 @@
 import { BaseError, ServiceError } from "../utils/errors"
-import queryString from 'query-string';
-
+import querystring from 'node:querystring'; 
 /**
  * Client Configuration
  */
@@ -44,7 +43,7 @@ export class LotrClient {
      * @returns 
      */
     async getAllMovies(opts?: LotrClientOptions) {
-        const res = await this.fetch_(this.config.baseUrl, `movie?${queryString.stringify(opts)}`, {
+        const res = await this.fetch_(this.config.baseUrl, `movie?${querystring.stringify(opts as any)}`, {
             method: 'GET',
             headers: {
                 authorization: `Bearer ${this.token}`,
@@ -85,7 +84,7 @@ export class LotrClient {
      * @returns 
      */
     async getQuotesFromMovie(movieId: string, opts?: LotrClientOptions) {
-        const res = await this.fetch_(this.config.baseUrl, `movie/${movieId}/quote?${queryString.stringify(opts)}`, {
+        const res = await this.fetch_(this.config.baseUrl, `movie/${movieId}/quote?${querystring.stringify(opts as any)}`, {
             method: 'GET',
             headers: {
                 authorization: `Bearer ${this.token}`,
