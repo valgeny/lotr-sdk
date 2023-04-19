@@ -44,17 +44,10 @@ export class LotrClient {
         // Retrieve parameters
         const { method, body, timeoutMs, headers } = options;
 
-        // Set timeout
-        const controller = new AbortController();
-        const timeout = setTimeout(() => {
-            controller.abort();
-        }, timeoutMs);
-
         // Merge options
         Object.assign(options,
             { method: method || 'GET' },
             { body: body || undefined },
-            { timeoutMs: timeoutMs || 5000 },
             {
                 /* Note: keys must be lowercase */
                 headers: Object.assign(
@@ -66,7 +59,6 @@ export class LotrClient {
                     Object.keys(headers).reduce((acc: Record<string, string>, key: string) => ({ ...acc, [key.toLowerCase()]: headers[key] }), {})
                 )
             },
-            // { signal: controller.signal },
         )
 
         console.debug('Options', options)
