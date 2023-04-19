@@ -15,7 +15,7 @@ export class LotrClient {
 
     async getAllMovies(opt: { limit: number, page: number, offset: number }) {
         let data
-        const res = await fetch(`${this.config.baseUrl}/movies`. {
+        const res = await fetch(`${this.config.baseUrl}/movies`, {
             method: 'GET' ,
             headers: { 
                 authorization: `Bearer ${this.token}`,
