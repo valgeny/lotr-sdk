@@ -43,7 +43,7 @@ export class LotrClient {
      * @returns 
      */
     async getAllMovies(opts?: LotrClientOptions) {
-        const res = await this.fetch_(this.config.baseUrl, `movie?${querystring.stringify(opts as any)}`, {
+        const res = await this.fetch_(this.config.baseUrl, `v2/movie?${querystring.stringify(opts as any)}`, {
             method: 'GET',
             headers: {
                 authorization: `Bearer ${this.token}`,
@@ -62,7 +62,7 @@ export class LotrClient {
      * @returns 
      */
     async getMovieById(movieId: string) {
-        const res = await this.fetch_(this.config.baseUrl, `movie/${movieId}`, {
+        const res = await this.fetch_(this.config.baseUrl, `v2/movie/${movieId}`, {
             method: 'GET',
             headers: {
                 authorization: `Bearer ${this.token}`,
@@ -84,7 +84,7 @@ export class LotrClient {
      * @returns 
      */
     async getQuotesFromMovie(movieId: string, opts?: LotrClientOptions) {
-        const res = await this.fetch_(this.config.baseUrl, `movie/${movieId}/quote?${querystring.stringify(opts as any)}`, {
+        const res = await this.fetch_(this.config.baseUrl, `v2/movie/${movieId}/quote?${querystring.stringify(opts as any)}`, {
             method: 'GET',
             headers: {
                 authorization: `Bearer ${this.token}`,
