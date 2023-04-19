@@ -28,7 +28,7 @@ npm install @valgeny/lotr-sdk@latest
 npm adduser
 ```
 
-
+## Build process
 1. Install (required only if dependencies were modified)
 
     ```
