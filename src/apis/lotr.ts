@@ -1,20 +1,50 @@
 import { BaseError, ServiceError } from "../utils/errors"
+import { stringify } from 'query-string';
 
+/**
+ * Client Configuration
+ */
 export interface LotrClientConfig {
     baseUrl: string
 }
 
+/**
+ * Request options for the Lotr API
+ */
+export interface LotrClientOptions {
+    // Pagination options
+    limit?: number,
+    page?: number,
+    offset?: number,
+    // Sort options
+    sortKey?: string,
+    sortOrder?: 'asc' | 'desc'
+    // Todo: Add Filtering
+}
+
+/**
+ * Client for the LOTR API
+ */
 export class LotrClient {
     private token;
     readonly config
+    /**
+     * Constructor
+     * @param config Client config
+     * @param token Auth Token
+     */
     constructor(config: LotrClientConfig, token: string) {
         this.config = config
         this.token = token
     }
 
-
-    async getAllMovies(opt: { limit: number, page: number, offset: number }) {
-        const res = await this.fetch_(this.config.baseUrl, 'movie', {
+    /**
+     * List of all movies, including the "The Lord of the Rings" and the "The Hobbit" trilogies
+     * @param opts 
+     * @returns 
+     */
+    async getAllMovies(opts?: LotrClientOptions) {
+        const res = await this.fetch_(this.config.baseUrl, `movie?${stringify(opts)}`, {
             method: 'GET',
             headers: {
                 authorization: `Bearer ${this.token}`,
@@ -26,6 +56,12 @@ export class LotrClient {
         return { docs, total }
     }
 
+    /**
+     * Request one specific movie
+     * @param movieId 
+     * @param opts 
+     * @returns 
+     */
     async getMovieById(movieId: string) {
         const res = await this.fetch_(this.config.baseUrl, `movie/${movieId}`, {
             method: 'GET',
@@ -40,8 +76,16 @@ export class LotrClient {
         return { docs, total }
     }
 
-    async getQuotesFromMovie(movieId: string) {
-        const res = await this.fetch_(this.config.baseUrl, `movie/${movieId}/quote`, {
+
+    /**
+     * Request all movie quotes for one specific movie 
+     * (only working for the LotR trilogy)
+     * @param movieId 
+     * @param opts 
+     * @returns 
+     */
+    async getQuotesFromMovie(movieId: string, opts?: LotrClientOptions) {
+        const res = await this.fetch_(this.config.baseUrl, `movie/${movieId}/quote?${stringify(opts)}`, {
             method: 'GET',
             headers: {
                 authorization: `Bearer ${this.token}`,
