@@ -39,10 +39,10 @@ export class LotrClient {
     async fetch_(
         baseUrl: string,
         path: string,
-        options: { method: string; body?: string; headers?: any; agent?: any; timeoutMs?: number }
+        options: { method: string; body?: string; headers?: any; timeoutMs?: number }
     ): Promise<any> {
         // Retrieve parameters
-        const { method, body, agent, timeoutMs, headers } = options;
+        const { method, body, timeoutMs, headers } = options;
 
         // Set timeout
         const controller = new AbortController();
@@ -66,7 +66,7 @@ export class LotrClient {
                     Object.keys(headers).reduce((acc: Record<string, string>, key: string) => ({ ...acc, [key.toLowerCase()]: headers[key] }), {})
                 )
             },
-            { signal: controller.signal },
+            // { signal: controller.signal },
         )
 
         console.debug('Options', options)
