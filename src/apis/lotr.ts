@@ -1,4 +1,3 @@
-import AbortController from "abort-controller";
 import { BaseError, ServiceError } from "../utils/errors"
 
 export interface LotrClientConfig {
@@ -11,12 +10,10 @@ export class LotrClient {
     constructor(config: LotrClientConfig, token: string) {
         this.config = config
         this.token = token
-
     }
 
 
     async getAllMovies(opt: { limit: number, page: number, offset: number }) {
-        let data
         const res = await this.fetch_(this.config.baseUrl, 'movie', {
             method: 'GET',
             headers: {
@@ -25,22 +22,42 @@ export class LotrClient {
             }
         });
         console.log(res)
-        return data
+        return res.respBody
     }
 
     async getMovieById(movieId: string) {
-
+        const res = await this.fetch_(this.config.baseUrl, `movie/${movieId}`, {
+            method: 'GET',
+            headers: {
+                authorization: `Bearer ${this.token}`,
+                'content-type': 'application/json',
+            }
+        });
+        console.log(res)
+        return res.respBody
     }
 
     async getQuotesFromMovie(movieId: string) {
 
     }
 
-    async fetch_(
+    /**
+     * Fetch Helper. 
+     * Includes error management
+     * @param baseUrl BaseUrl for the service
+     * @param path Endpoint route
+     * @param options 
+     * @returns 
+     */
+    protected async fetch_(
         baseUrl: string,
         path: string,
-        options: { method: string; body?: string; headers?: any}
-    ): Promise<any> {
+        options: { method: string; body?: string; headers?: any }
+    ): Promise<{
+        respCode: number;
+        respBody: unknown | unknown[];
+        respHeaders: Record<string, unknown>;
+    }> {
         // Retrieve parameters
         const { method, body, headers } = options;
 
@@ -60,8 +77,6 @@ export class LotrClient {
                 )
             },
         )
-
-        console.debug('Options', options)
 
         // Output variables
         let respCode = 0;
@@ -87,7 +102,7 @@ export class LotrClient {
                 respHeaders = res.headers;
                 throw new ServiceError('Http request failed with status:', null, {
                     req: { baseUrl, path, options },
-                    resp: { respCode, respBody, respHeaders: Object.keys(respHeaders).reduce((a, x) => ({ ...a, [x]: respHeaders.get(x) }), {}) },
+                    resp: { respCode, respBody, respHeaders },
                     time: { startTs, endTs: new Date(), timeoutTs: null },
                 });
             }
