@@ -32,7 +32,7 @@ npm adduser
 1. Install (required only if dependencies were modified)
 
     ```
-    npm i,
+    npm install,
     ```
 1. Compile module
 
