@@ -77,7 +77,7 @@ export class LotrClient {
             // Extract Response
             respCode = res.status;
             if (respCode < 300) {
-                respBody = await res.json();
+                respBody = await res.text();
                 respHeaders = res.headers;
             } else if (respCode < 400) {
                 respBody = null;
