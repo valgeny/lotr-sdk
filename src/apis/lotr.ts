@@ -1,5 +1,5 @@
 import AbortController from "abort-controller";
-import { BaseError, ServiceError } from "src/utils/errors";
+import { BaseError, ServiceError } from "../utils/errors"
 
 export interface LotrClientConfig {
     baseUrl: string
