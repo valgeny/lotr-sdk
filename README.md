@@ -1,12 +1,25 @@
-# Stargate utils
+# LOTR SDK
 
+SDK to access the LOTR Api v2
+
+See also: 
+- https://the-one-api.dev/
+- https://the-one-api.dev/documentation
+
+## Prerequisites
+- NodeJs > 18 (Fetch module)
+
+See also: 
+- https://www.freecodecamp.org/news/node-version-manager-nvm-install-guide/
+- https://dev.to/cloudx/nodejs-18-fetch-api-test-runner-module-and-more-2ckg
+
+# Using it in your app
 ```
-npm install @valgeny/lotr-sdk
+npm install @valgeny/lotr-sdk@latest
 ```
 
 
-# Building
-
+# Building and publishing a new version
 
 ## Prerequisites
 1. Create a npm account
@@ -15,7 +28,6 @@ npm install @valgeny/lotr-sdk
 npm adduser
 ```
 
-## Publish a new version
 
 1. Install (required only if dependencies were modified)
 
