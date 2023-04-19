@@ -38,7 +38,15 @@ export class LotrClient {
     }
 
     async getQuotesFromMovie(movieId: string) {
-
+        const res = await this.fetch_(this.config.baseUrl, `movie/${movieId}/quote`, {
+            method: 'GET',
+            headers: {
+                authorization: `Bearer ${this.token}`,
+                'content-type': 'application/json',
+            }
+        });
+        console.log(res)
+        return res.respBody
     }
 
     /**
