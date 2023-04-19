@@ -95,7 +95,7 @@ export class LotrClient {
                 respHeaders = res.headers;
                 throw new ServiceError('Http request failed with status:', null, {
                     req: { baseUrl, path, options },
-                    resp: { respCode, respBody, respHeaders: Object.keys(respHeaders()).reduce((a, x) => ({ ...a, [x]: respHeaders.get(x) }), {}) },
+                    resp: { respCode, respBody, respHeaders: Object.keys(respHeaders).reduce((a, x) => ({ ...a, [x]: respHeaders.get(x) }), {}) },
                     time: { startTs, endTs: new Date(), timeoutTs: null },
                 });
             }
