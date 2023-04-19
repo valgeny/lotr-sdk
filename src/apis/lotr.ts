@@ -21,8 +21,9 @@ export class LotrClient {
                 'content-type': 'application/json',
             }
         });
-        console.log(res)
-        return res.respBody
+        /** Extract Relevant information */
+        const { docs, total } = res.respBody as { docs: unknown[]; total: number }
+        return { docs, total }
     }
 
     async getMovieById(movieId: string) {
@@ -33,8 +34,10 @@ export class LotrClient {
                 'content-type': 'application/json',
             }
         });
-        console.log(res)
-        return res.respBody
+
+        /** Extract Relevant information */
+        const { docs, total } = res.respBody as { docs: unknown[]; total: number }
+        return { docs, total }
     }
 
     async getQuotesFromMovie(movieId: string) {
@@ -45,8 +48,9 @@ export class LotrClient {
                 'content-type': 'application/json',
             }
         });
-        console.log(res)
-        return res.respBody
+        /** Extract Relevant information */
+        const { docs, total } = res.respBody as { docs: unknown[]; total: number }
+        return { docs, total }
     }
 
     /**
