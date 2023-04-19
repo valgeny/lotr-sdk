@@ -7,26 +7,33 @@ npm install @valgeny/lotr-sdk
 
 # Building
 
-1. Create a new Branch with the `-build` suffix
-    ```
-    git checkout -b <YOUR_BRANCH_NAME>-build
-    ```
 
+## Prerequisites
+1. Create a npm account
+1. Log in on your local machine
+```
+npm adduser
+```
+
+## Publish a new version
+
+1. Install (required only if dependencies were modified)
+
+    ```
+    npm i,
+    ```
 1. Compile module
 
     ```
     npm run compile,
     ```
-
-1. Commit & push
-
-# Development work (local)
-
-1. Update `package.json`
-    ```yaml
-    ...
-    "@valgeny/lotr-sdk": "file:../lotr-sdk",
-    ...
+1. Increment version
+    ```
+    npm version patch -m 'New release'
+    ```
+1. Publish (public)
+    ```
+    npm publish --access=public
     ```
 
 1. Install latest version of the package

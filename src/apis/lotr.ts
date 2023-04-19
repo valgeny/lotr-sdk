@@ -3,7 +3,7 @@ interface LotrApiConfig {
     baseUrl: string
 }
 
-class LotrApi {
+export class LotrApi {
     private token;
     readonly config
     constructor(config: LotrApiConfig, token: string) {
