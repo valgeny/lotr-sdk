@@ -14,11 +14,19 @@ export class LotrClient {
 
 
     async getAllMovies(opt: { limit: number, page: number, offset: number }) {
-        const res = await fetch(`${this.config.baseUrl}/movies`);
+        let data
+        const res = await fetch(`${this.config.baseUrl}/movies`. {
+            method: 'GET' ,
+            headers: { 
+                authorization: `Bearer ${this.token}`,
+                'content-type': 'application/json',
+            }
+        });
         if (res.ok) {
-            const data = await res.json();
+            data = await res.json();
             console.log(data);
         }
+        return data
     }
 
     async getMovieById(movieId: string) {
