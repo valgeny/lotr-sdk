@@ -1,5 +1,7 @@
 import { BaseError, ServiceError } from "../utils/errors"
 import querystring from 'node:querystring'; 
+
+
 /**
  * Client Configuration
  */
@@ -40,7 +42,7 @@ export class LotrClient {
     /**
      * List of all movies, including the "The Lord of the Rings" and the "The Hobbit" trilogies
      * @param opts 
-     * @returns 
+     * @returns {docs: List of movies; total: Total available movies}
      */
     async getAllMovies(opts?: LotrClientOptions) {
         const res = await this.fetch_(this.config.baseUrl, `v2/movie?${querystring.stringify(opts as any)}`, {
@@ -59,7 +61,8 @@ export class LotrClient {
      * Request one specific movie
      * @param movieId 
      * @param opts 
-     * @returns 
+     * @returns {docs: Selected Movie total: 1}
+     * Note: You could modify the return type to only return the selected movie, or keep it consistent with the rest of the API
      */
     async getMovieById(movieId: string) {
         const res = await this.fetch_(this.config.baseUrl, `v2/movie/${movieId}`, {
@@ -81,7 +84,7 @@ export class LotrClient {
      * (only working for the LotR trilogy)
      * @param movieId 
      * @param opts 
-     * @returns 
+     * @returns {docs: List of Quotes; total: Total available quotes}
      */
     async getQuotesFromMovie(movieId: string, opts?: LotrClientOptions) {
         const res = await this.fetch_(this.config.baseUrl, `v2/movie/${movieId}/quote?${querystring.stringify(opts as any)}`, {
