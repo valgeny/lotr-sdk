@@ -1,5 +1,5 @@
 import { BaseError, ServiceError } from "../utils/errors"
-import { stringify } from 'query-string';
+import stringify from "query-string"
 
 /**
  * Client Configuration
