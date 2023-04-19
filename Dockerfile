@@ -1,4 +1,4 @@
-ARG nodeVersion=16.19.0
+ARG nodeVersion=20.0.0
 ARG alpineVersion=3.17
 ARG PROD_NODE_MODULES_PATH=/tmp/prod_node_modules
 ARG scannerVersion=latest
@@ -7,11 +7,8 @@ ARG NPM_AUTH
 ARG NPM_EMAIL
 
 #base layer
-FROM hub.docker.prod.com/library/node:${nodeVersion}-alpine${alpineVersion} AS base
-RUN SYS_MAJ_VER=$( grep '^VERSION' /etc/os-release|awk -F= '{ print $2 }'|awk -F. '{ print("v"$1"."$2) }') \
-    && echo "http://ark-repos.wal-mart.com/ark/apk/published/alpine/3.17/direct/soe/noenv/community/" > /etc/apk/repositories \
-    && echo "http://ark-repos.wal-mart.com/ark/apk/published/alpine/3.17/direct/soe/noenv/main/" >> /etc/apk/repositories \
-    && apk update && apk upgrade 
+FROM registry.hub.docker.com/library/node:latest
+
 
 RUN apk --no-cache add \
   bash \
@@ -30,7 +27,6 @@ RUN apk --no-cache add \
 
 RUN rm -rf /var/cache/* \
     && mkdir /var/cache/apk
-
 
 
 WORKDIR /root/app
