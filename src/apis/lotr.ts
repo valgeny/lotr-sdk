@@ -100,7 +100,7 @@ export class LotrClient {
         try {
             const res = await fetch(new URL(path, baseUrl).href, options);
             console.info(`Outbound Request: ${method} ${res.url} ${res.status}`);
-            console.log(res)
+
             // Extract Response
             respCode = res.status;
             if (respCode < 300) {
