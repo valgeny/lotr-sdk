@@ -1,12 +1,12 @@
 
-interface LotrApiConfig {
+export interface LotrClientConfig {
     baseUrl: string
 }
 
-export class LotrApi {
+export class LotrClient {
     private token;
     readonly config
-    constructor(config: LotrApiConfig, token: string) {
+    constructor(config: LotrClientConfig, token: string) {
         this.config = config
         this.token = token
 
