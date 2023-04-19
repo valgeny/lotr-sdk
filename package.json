@@ -1,6 +1,6 @@
 {
   "name": "@valgeny/lotr-sdk",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "LOTR SDK",
   "main": "dist/index",
   "repository": {
